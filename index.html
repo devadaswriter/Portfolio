@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devashish Kumar | Tech Writer & Editor</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: 'var(--accent-color)',
+                        'accent-dim': 'color-mix(in srgb, var(--accent-color), transparent 40%)',
+                        'accent-glow': 'color-mix(in srgb, var(--accent-color), transparent 80%)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="https://fonts.cdnfonts.com/css/amerika" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/caviar-dreams" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/qlassik-medium" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/alegreya-sans-sc" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. COLOR ENGINE (30s Rule) --- */
+        @property --accent-color {
+            syntax: '<color>';
+            initial-value: #d4af37;
+            inherits: true;
+        }
+
+        :root {
+            --accent-color: #d4af37; 
+            --vintage-dark: #121212;
+            --vintage-paper: #e0d8c3;
+        }
+
+        html {
+            transition: --accent-color 2s ease-in-out;
+        }
+
+        body {
+            background-color: var(--vintage-dark);
+            color: var(--vintage-paper);
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6, .nav-link { font-family: 'Poppins', sans-serif; }
+        .tech-font { font-family: 'JetBrains Mono', monospace; }
+        .font-amerika { font-family: 'Amerika', cursive; }
+        .font-caviar { font-family: 'Caviar Dreams', sans-serif; font-weight: 700; }
+        .font-qlassik { font-family: 'Qlassik Medium', sans-serif; letter-spacing: 0.5px; }
+        .font-alegreya { font-family: 'Alegreya Sans SC', sans-serif; font-weight: 500; letter-spacing: 0.5px; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1a1a1a; }
+        ::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 4px; }
+
+        /* --- 2. PROFESSIONAL 3D SETTINGS --- */
+        .card-3d-wrap { 
+            perspective: 1500px; 
+        }
+        
+        .card-3d { 
+            transform-style: preserve-3d; 
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 2s ease; 
+            will-change: transform;
+        }
+        
+        .card-content-float {
+            transform: translateZ(15px);
+            transform-style: preserve-3d;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        /* Grid Background */
+        .tech-grid-bg {
+            background-image: 
+                linear-gradient(color-mix(in srgb, var(--accent-color), transparent 97%) 1px, transparent 1px),
+                linear-gradient(90deg, color-mix(in srgb, var(--accent-color), transparent 97%) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-attachment: fixed;
+        }
+
+        /* Input Styling */
+        .retro-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--accent-color);
+            color: var(--vintage-paper);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .retro-input:focus { outline: none; box-shadow: 0 0 10px var(--accent-color); }
+
+        .counter-value { font-variant-numeric: tabular-nums; font-weight: 700; }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: var(--accent-color);
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        
+        /* DECAGON & ANIMATIONS */
+        .decagon-clip {
+            clip-path: polygon(50% 0%, 80.9% 9.5%, 100% 34.5%, 100% 65.5%, 80.9% 90.5%, 50% 100%, 19.1% 90.5%, 0% 65.5%, 0% 34.5%, 19.1% 9.5%);
+        }
+        @keyframes slowSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: slowSpin 25s linear infinite; 
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateX(0); }
+            50% { transform: translateY(-8px) rotateX(2deg); }
+        }
+        .animate-float {
+            animation: float 7s ease-in-out infinite; 
+        }
+
+        /* Mobile Menu */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            background-color: #0f0f0f;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+        }
+        
+        .highlight-item { opacity: 0; }
+
+        .hover-glow:hover {
+            box-shadow: 0 0 15px var(--accent-glow);
+            border-color: var(--accent-color);
+        }
+
+        /* --- ARTICLE CAROUSEL STYLES --- */
+        .article-scroll-container {
+            overflow-x: auto;
+            scroll-behavior: auto; 
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; 
+        }
+        .article-scroll-container::-webkit-scrollbar {
+            display: none; 
+        }
+
+        .article-card-outline {
+            width: 100vw; 
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        @media (min-width: 768px) {
+            .article-card-outline {
+                width: 640px; 
+            }
+        }
+
+        .aspect-16-9-strict {
+            aspect-ratio: 16/9;
+        }
+
+        /* Modal Diamond Blur Effect */
+        .diamond-blur-bg {
+            background: rgba(5, 5, 5, 0.95); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+        
+        /* Report Link Hover */
+        .report-link:hover {
+            background: linear-gradient(90deg, var(--accent-dim), transparent);
+            padding-left: 1rem;
+        }
+
+        /* Smooth Hide/Show Class */
+        .hidden-content {
+            display: none !important;
+        }
+        .visible-content {
+            display: block !important;
+        }
+        .visible-grid {
+            display: grid !important;
+        }
+        
+        /* Archive Grid Styles */
+        .archive-grid-item {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .archive-grid-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 5px 20px -10px var(--accent-glow);
+        }
+
+        /* Hero Image Transition */
+        .hero-img {
+            transition: opacity 1s ease-in-out;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Fix for Image Quality */
+        img {
+            image-rendering: -webkit-optimize-contrast; 
+        }
+    </style>
+</head>
+<body class="tech-grid-bg">
+
+    <!-- Navigation (Z-Index increased to 1000 for mobile menu fix) -->
+    <nav class="fixed w-full z-[1000] bg-black/95 backdrop-blur-sm border-b border-accent/30 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <span class="text-xl md:text-2xl font-bold text-accent tech-font tracking-tighter">
+                        I'm DevaDas
+                    </span>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8 text-sm font-medium nav-link tracking-wide">
+                        <a href="#about" class="hover:text-accent transition-colors duration-300">ABOUT</a>
+                        <a href="#highlights" class="hover:text-accent transition-colors duration-300">STATS</a>
+                        <a href="#experience" class="hover:text-accent transition-colors duration-300">EXPERIENCE</a>
+                        <a href="#articles" class="hover:text-accent transition-colors duration-300">ARTICLES</a>
+                        <a href="#skills" class="hover:text-accent transition-colors duration-300">SKILLS</a>
+                        <a href="#education" class="hover:text-accent transition-colors duration-300">EDUCATION</a>
+                    </div>
+                </div>
+
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-accent hover:text-white focus:outline-none p-2 relative z-[1001]">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="md:hidden relative z-[999]">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center tech-font">
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-white hover:text-accent mobile-link">ABOUT</a>
+                <a href="#highlights" class="block px-3 py-2 text-base font-medium text-white hover:text-accent mobile-link">STATS</a>
+                <a href="#experience" class="block px-3 py-2 text-base font-medium text-white hover:text-accent mobile-link">EXPERIENCE</a>
+                <a href="#articles" class="block px-3 py-2 text-base font-medium text-white hover:text-accent mobile-link">ARTICLES</a>
+                <a href="#skills" class="block px-3 py-2 text-base font-medium text-white hover:text-accent mobile-link">SKILLS</a>
+                <a href="#education" class="block px-3 py-2 text-base font-medium text-white hover:text-accent mobile-link">EDUCATION</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden pt-28 md:pt-20" id="home">
+        <div class="absolute inset-0 z-0 pointer-events-none">
+             <div class="absolute top-1/4 -left-20 w-80 h-80 border border-accent opacity-10 rounded-full animate-pulse"></div>
+             <div class="absolute bottom-1/4 -right-20 w-96 h-96 border border-accent opacity-5 rounded-full" style="animation: spin 30s linear infinite;"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <!-- Left Content: 3D CARD -->
+            <div data-aos="fade-right" data-aos-duration="1200" class="card-3d-wrap">
+                <div class="card-3d p-2">
+                    <div class="card-content-float">
+                        <p class="tech-font text-accent mb-2 md:mb-4 tracking-widest text-xs md:text-sm font-medium">EST. 2024-2025 // I'm Portfolio</p>
+                        
+                        <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold mb-4 md:mb-6 leading-tight flex items-center font-caviar">
+                            <span id="typewriter-text" class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent-dim"></span><span class="cursor">&nbsp;</span>
+                        </h1>
+
+                        <h2 id="hero-subtitle" class="text-lg md:text-2xl font-qlassik text-gray-400 mb-6 md:mb-8 min-h-[1.75rem] transition-all duration-500">
+                            Tech Writer | SEO Expert | Digital Artist
+                        </h2>
+                        
+                        <p class="text-[18px] md:text-[25px] text-[#e0d8c3] mb-8 md:mb-10 border-l-2 border-accent pl-4 md:pl-6 font-amerika" 
+                           style="line-height: 1.5; word-spacing: -3px; min-height: 140px; md:min-height: 120px;">
+                            "<span id="paragraph-writer"></span>"
+                        </p>
+                        
+                        <a href="#contact" class="tech-font border border-accent text-accent px-6 py-2 md:px-8 md:py-3 hover:bg-accent hover:text-black transition-all duration-300 inline-block tracking-widest text-sm md:text-base font-bold">
+                            CONTACT_ME
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content: 3D Decagon + Highlights -->
+            <div class="flex justify-center perspective-container card-3d-wrap mt-8 md:mt-0" id="hero-tilt-container">
+                <div class="flex flex-col items-center card-3d w-64 lg:w-72">
+                    
+                    <!-- 3D Animated Decagon with Dynamic Image -->
+                    <div class="relative w-48 h-48 md:w-56 md:h-56 animate-float transform-style-3d mb-6 flex-shrink-0 card-content-float">
+                        <div class="absolute inset-[-8px] bg-gradient-to-r from-accent to-transparent decagon-clip opacity-40 animate-spin-slow blur-sm"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-accent to-accent-dim decagon-clip shadow-[0_0_20px_var(--accent-glow)]"></div>
+                        <div class="absolute inset-[3px] bg-[#121212] decagon-clip flex items-center justify-center overflow-hidden">
+                            <!-- Dynamic Image Container (FHD+) -->
+                            <img id="profile-slideshow" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNPV__yhQOBBzX9G8Or0w_cK2SIpyQwA2GHLXpbi7jD7wt-tUY-ebRStp-fURMI3vQ5qXuxCjceilS3LW-Vq78_Ah9nvYhjdbls4X8xUwLo6Ubb-XfCQN3pD6ia4w8ZhXTzj9ih0dxriliFABjlZKrwFUMBgySD7tHyzhT6TTsNsnBBXkky6zQD2Yfmss/s3456/IMG_COM_202512060433422980.webp" 
+                                 alt="Profile" 
+                                 class="w-full h-full object-cover opacity-100 hero-img">
+                        </div>
+                    </div>
+
+                    <!-- Text & Highlights -->
+                    <div class="w-full text-center space-y-4 card-content-float">
+                        <p class="text-[12px] text-gray-300 font-medium leading-snug">
+                            While others confuse, I simplify. While they hype, I clarify. That's my promise.
+                        </p>
+                        
+                        <!-- Highlights List -->
+                        <div class="space-y-1.5 bg-black/40 backdrop-blur-sm p-4 rounded-xl border border-white/5 shadow-2xl" id="highlight-list">
+                            <p class="text-[10px] text-accent font-bold tracking-widest text-center mb-2 border-b border-gray-800 pb-2">SYSTEM_HIGHLIGHTS</p>
+                            
+                            <div class="text-left space-y-1.5 pl-2">
+                                <p class="text-[11px] text-white font-medium highlight-item flex items-center gap-2"><span class="w-1 h-1 bg-accent rounded-full"></span>700+ Articles Delivered</p>
+                                <p class="text-[11px] text-white font-medium highlight-item flex items-center gap-2"><span class="w-1 h-1 bg-gray-500 rounded-full"></span>91mobiles & Smartprix</p>
+                                <p class="text-[11px] text-white font-medium highlight-item flex items-center gap-2"><span class="w-1 h-1 bg-gray-500 rounded-full"></span>Ghostwriting Specialist</p>
+                                <p class="text-[11px] text-white font-medium highlight-item flex items-center gap-2"><span class="w-1 h-1 bg-gray-500 rounded-full"></span>3+ Years Experience</p>
+                                <p class="text-[11px] text-white font-medium highlight-item flex items-center gap-2"><span class="w-1 h-1 bg-gray-500 rounded-full"></span>SEO & Keyword Expert</p>
+                                <p class="text-[11px] text-white font-medium highlight-item flex items-center gap-2"><span class="w-1 h-1 bg-gray-500 rounded-full"></span>Tech Journalism</p>
+                                <p class="text-[11px] text-white font-medium highlight-item flex items-center gap-2"><span class="w-1 h-1 bg-gray-500 rounded-full"></span>CMS & AP Style</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-center items-center gap-2 tech-font text-[10px] text-accent font-bold pt-2">
+                            <span class="w-1.5 h-1.5 bg-[#33ff00] rounded-full animate-pulse shadow-[0_0_5px_#33ff00]"></span>
+                            <span>SYSTEM ONLINE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HIGHLIGHTS SECTION -->
+    <section id="highlights" class="py-12 bg-[#0a0a0a] border-y border-accent/20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                <div class="card-3d-wrap" data-aos="fade-up" data-aos-delay="0">
+                    <div class="card-3d bg-[#151515] p-4 md:p-6 border border-accent/30 text-center hover:bg-white/5 transition-colors h-full flex flex-col justify-center rounded-lg hover-glow">
+                        <div class="card-content-float">
+                            <i class="fas fa-newspaper text-2xl md:text-3xl text-accent mb-3"></i>
+                            <h3 class="text-3xl md:text-4xl font-bold text-white mb-1"><span class="counter-value" data-target="700">0</span>+</h3>
+                            <p class="tech-font text-xs text-accent font-bold">ARTICLES DELIVERED</p>
+                            <p class="text-[10px] text-gray-500 mt-1 font-medium">Across 91mobiles & Smartprix</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-3d-wrap" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-3d bg-[#151515] p-4 md:p-6 border border-accent/30 text-center hover:bg-white/5 transition-colors h-full flex flex-col justify-center rounded-lg hover-glow">
+                        <div class="card-content-float">
+                            <i class="fas fa-briefcase text-2xl md:text-3xl text-accent mb-3"></i>
+                            <h3 class="text-3xl md:text-4xl font-bold text-white mb-1"><span class="counter-value" data-target="3">0</span>+</h3>
+                            <p class="tech-font text-xs text-accent font-bold">YEARS EXPERIENCE</p>
+                            <p class="text-[10px] text-gray-500 mt-1 font-medium">Tech Journalism & SEO</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-3d-wrap" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-3d bg-[#151515] p-4 md:p-6 border border-accent/30 text-center hover:bg-white/5 transition-colors h-full flex flex-col justify-center rounded-lg hover-glow">
+                        <div class="card-content-float">
+                            <i class="fas fa-tools text-2xl md:text-3xl text-accent mb-3"></i>
+                            <h3 class="text-3xl md:text-4xl font-bold text-white mb-1"><span class="counter-value" data-target="30">0</span>+</h3>
+                            <p class="tech-font text-xs text-accent font-bold">PRO SKILLS</p>
+                            <p class="text-[10px] text-gray-500 mt-1 font-medium">Tech, Writing & Design</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-3d-wrap" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-3d bg-[#151515] p-4 md:p-6 border border-accent/30 text-center hover:bg-white/5 transition-colors h-full flex flex-col justify-center rounded-lg hover-glow">
+                        <div class="card-content-float">
+                            <i class="fas fa-building text-2xl md:text-3xl text-accent mb-3"></i>
+                            <h3 class="text-3xl md:text-4xl font-bold text-white mb-1"><span class="counter-value" data-target="2">0</span></h3>
+                            <p class="tech-font text-xs text-accent font-bold">TOP PUBLISHERS</p>
+                            <p class="text-[10px] text-gray-500 mt-1 font-medium">Major Industry Players</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 md:py-20 bg-[#0f0f0f]">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold mb-12 md:mb-16 text-center" data-aos="fade-up">
+                <span class="section-title">Professional Experience</span>
+            </h2>
+
+            <div class="relative border-l-2 border-accent ml-2 md:ml-10 space-y-8 md:space-y-12">
+                
+                <!-- Smartprix -->
+                <div class="relative pl-6 md:pl-16 card-3d-wrap" data-aos="fade-left" data-aos-delay="100">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-accent"></div>
+                    <div class="bg-[#1a1a1a] p-5 md:p-8 border border-gray-800 hover:border-accent transition-all duration-300 card-3d hover-glow rounded-lg">
+                        <div class="card-content-float">
+                            <div class="flex flex-col md:flex-row justify-between mb-4">
+                                <h3 class="text-xl md:text-2xl text-accent font-alegreya leading-tight mb-1 md:mb-0">Consumer Technology Writer</h3>
+                                <span class="tech-font text-xs md:text-sm text-gray-400 font-medium">Feb 2025 - Present | Smartprix</span>
+                            </div>
+                            <p class="mb-4 text-gray-300 text-sm md:text-base font-medium">Remote | Ghostwritten for Shikhar Mehrotra</p>
+                            <ul class="list-none space-y-2 text-gray-400 text-sm md:text-base">
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Contributes 7-10 SEO friendly tech articles monthly.</li>
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Written over 80 articles covering Smartphones, AI, Security.</li>
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Ghostwrites informative tech news and reviews for Shikhar Mehrotra.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 91mobiles (Saloni) -->
+                <div class="relative pl-6 md:pl-16 card-3d-wrap" data-aos="fade-left" data-aos-delay="200">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-accent"></div>
+                    <div class="bg-[#1a1a1a] p-5 md:p-8 border border-gray-800 hover:border-accent transition-all duration-300 card-3d hover-glow rounded-lg">
+                        <div class="card-content-float">
+                            <div class="flex flex-col md:flex-row justify-between mb-4">
+                                <h3 class="text-xl md:text-2xl text-accent font-alegreya leading-tight mb-1 md:mb-0">Freelance Writer</h3>
+                                <span class="tech-font text-xs md:text-sm text-gray-400 font-medium">Sep 2024 - Present | 91mobiles</span>
+                            </div>
+                            <p class="mb-4 text-gray-300 text-sm md:text-base font-medium">Remote | Assoc. Editor Saloni Tandon</p>
+                            <ul class="list-none space-y-2 text-gray-400 text-sm md:text-base">
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Delivered 150+ articles focused on gadgets & tech trends.</li>
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Ensured SEO friendliness and clear content delivery.</li>
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Consistently writes 10-11 high-quality articles monthly.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 91mobiles (Kamal) -->
+                <div class="relative pl-6 md:pl-16 card-3d-wrap" data-aos="fade-left" data-aos-delay="300">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-accent"></div>
+                    <div class="bg-[#1a1a1a] p-5 md:p-8 border border-gray-800 hover:border-accent transition-all duration-300 card-3d hover-glow rounded-lg">
+                        <div class="card-content-float">
+                            <div class="flex flex-col md:flex-row justify-between mb-4">
+                                <h3 class="text-xl md:text-2xl text-accent font-alegreya leading-tight mb-1 md:mb-0">Tech Correspondent Assistant</h3>
+                                <span class="tech-font text-xs md:text-sm text-gray-400 font-medium">Nov 2022 - Present | 91mobiles</span>
+                            </div>
+                            <p class="mb-4 text-gray-300 text-sm md:text-base font-medium">Remote | Senior Correspondent Kamal Kant</p>
+                            <ul class="list-none space-y-2 text-gray-400 text-sm md:text-base">
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Ghostwritten 470+ articles in Hindi & English mix.</li>
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Mastered Tech Journalism, Keyword Research, and SEO.</li>
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Works remotely assisting my uncle Kamal Kant. He is a Senior Correspondent at 91mobiles.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Freelance Writer & Editor -->
+                <div class="relative pl-6 md:pl-16 card-3d-wrap" data-aos="fade-left" data-aos-delay="400">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-accent"></div>
+                    <div class="bg-[#1a1a1a] p-5 md:p-8 border border-gray-800 hover:border-accent transition-all duration-300 card-3d hover-glow rounded-lg">
+                        <div class="card-content-float">
+                            <div class="flex flex-col md:flex-row justify-between mb-4">
+                                <h3 class="text-xl md:text-2xl text-accent font-alegreya leading-tight mb-1 md:mb-0">Freelance Writer & Editor</h3>
+                                <span class="tech-font text-xs md:text-sm text-gray-400 font-medium">Sep 2023 - Present | Self-Employed</span>
+                            </div>
+                            <p class="mb-4 text-gray-300 text-sm md:text-base font-medium">Remote</p>
+                            <ul class="list-none space-y-2 text-gray-400 text-sm md:text-base">
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Writer, editor, and researcher making complex topics easy.</li>
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Skills: Blogging, Data Analysis, Editing, Proofreading.</li>
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Focused on creating clear, reader-first content.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Marpu Foundation -->
+                 <div class="relative pl-6 md:pl-16 card-3d-wrap" data-aos="fade-left" data-aos-delay="500">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-accent"></div>
+                    <div class="bg-[#1a1a1a] p-5 md:p-6 border border-gray-800 hover:border-accent transition-all duration-300 card-3d rounded-lg">
+                        <div class="card-content-float">
+                            <h3 class="text-lg md:text-xl text-accent font-alegreya">Creative Writer (Marpu Foundation)</h3>
+                            <span class="tech-font text-xs text-gray-400 block mb-2 font-medium">Nov 2025 (1 Mo) | Internship</span>
+                            <ul class="list-none space-y-2 text-gray-400 text-sm md:text-base mt-2">
+                                 <li><i class="fas fa-caret-right text-accent mr-2"></i>Created engaging content for website/social media.</li>
+                                 <li><i class="fas fa-caret-right text-accent mr-2"></i>Conducted research and interviews for compelling stories.</li>
+                                 <li><i class="fas fa-caret-right text-accent mr-2"></i>Collaborated with teams to brainstorm creative strategies.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- InAmigos Foundation -->
+                <div class="relative pl-6 md:pl-16 card-3d-wrap" data-aos="fade-left" data-aos-delay="600">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-accent"></div>
+                    <div class="bg-[#1a1a1a] p-5 md:p-6 border border-gray-800 hover:border-accent transition-all duration-300 card-3d rounded-lg">
+                        <div class="card-content-float">
+                            <h3 class="text-lg md:text-xl text-accent font-alegreya">Creative Writer (InAmigos Foundation)</h3>
+                            <span class="tech-font text-xs text-gray-400 block mb-2 font-medium">Nov 2025 (1 Mo) | Internship</span>
+                            <ul class="list-none space-y-2 text-gray-400 text-sm md:text-base mt-2">
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Developed high-quality articles and social media posts.</li>
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Optimized content for clarity and impact.</li>
+                                <li><i class="fas fa-caret-right text-accent mr-2"></i>Collaborated with design teams to align content with campaigns.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW ARTICLE SECTION -->
+    <section id="articles" class="py-16 bg-[#121212] overflow-hidden">
+        <div class="max-w-[1280px] mx-auto relative px-0">
+            <h2 class="text-3xl md:text-5xl font-bold mb-10 text-center" data-aos="fade-down">
+                <span class="section-title">I'm an Article</span>
+            </h2>
+            
+            <!-- Marquee Container -->
+            <div class="w-full relative overflow-hidden group mb-8">
+                <!-- Track: Flex + JS Animation -->
+                <div id="article-track" class="flex gap-4 md:gap-8 article-scroll-container">
+                    <!-- Javascript will inject articles here -->
+                </div>
+            </div>
+            
+            <!-- VIEW ALL ARTICLES BUTTON -->
+            <div class="text-center" data-aos="fade-up">
+                <button onclick="openArchiveModal()" class="group relative px-8 py-3 bg-transparent border border-accent text-accent font-bold tracking-widest tech-font hover:bg-accent hover:text-black transition-all duration-300 overflow-hidden">
+                    <span class="relative z-10">VIEW ALL ARTICLES</span>
+                    <div class="absolute inset-0 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fullscreen Archive Modal -->
+    <div id="archive-modal" class="fixed inset-0 z-[10001] hidden items-start justify-center diamond-blur-bg overflow-y-auto">
+        <div class="min-h-screen w-full bg-[#0f0f0f]/95 p-4 md:p-12 relative">
+            <button onclick="closeArchiveModal()" class="fixed top-6 right-6 text-gray-400 hover:text-accent text-3xl z-50 bg-black/50 rounded-full p-2 w-12 h-12 flex items-center justify-center border border-accent/20 transition-colors"><i class="fas fa-times"></i></button>
+            
+            <h2 class="text-3xl md:text-5xl font-bold mb-12 text-center text-white mt-8">
+                <span class="section-title">Article Archive</span>
+            </h2>
+            
+            <div id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto pb-10">
+                <!-- Archive items injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Modal (Fixed) -->
+    <div id="report-modal" class="fixed inset-0 z-[10002] hidden items-center justify-center diamond-blur-bg p-4">
+        <div class="bg-[#0f0f0f]/95 border border-accent/40 rounded-xl p-4 md:p-8 max-w-3xl w-full relative shadow-[0_0_50px_rgba(212,175,55,0.2)] max-h-[90vh] overflow-y-auto" data-aos="zoom-in">
+            <button onclick="closeReport()" class="absolute top-4 right-4 text-gray-400 hover:text-accent text-2xl z-50"><i class="fas fa-times"></i></button>
+            
+            <h1 class="text-2xl md:text-3xl font-bold text-accent tech-font mb-8 text-center border-b border-accent/20 pb-4">Reports</h1>
+            
+            <!-- Initial State: Two Buttons -->
+            <div id="modal-main-options" class="grid md:grid-cols-2 gap-6 h-full transition-all duration-500 visible-grid">
+                <!-- Option 1: AI Reports -->
+                <div onclick="showAiDetails()" class="bg-[#1a1a1a] p-8 rounded-lg border border-gray-800 hover:border-accent cursor-pointer group transition-all flex flex-col items-center justify-center text-center gap-4 hover:shadow-[0_0_20px_rgba(212,175,55,0.1)] active:scale-95">
+                    <i class="fas fa-robot text-4xl text-gray-500 group-hover:text-accent transition-colors"></i>
+                    <h2 class="text-xl font-bold text-white group-hover:text-accent">AI Detection Reports</h2>
+                    <p class="text-xs text-gray-500">Click to view comprehensive analysis</p>
+                </div>
+
+                <!-- Option 2: Plagiarism -->
+                <a id="plagiarism-btn-link" href="#" target="_blank" class="bg-[#1a1a1a] p-8 rounded-lg border border-gray-800 hover:border-accent cursor-pointer group transition-all flex flex-col items-center justify-center text-center gap-4 hover:shadow-[0_0_20px_rgba(212,175,55,0.1)] active:scale-95">
+                    <i class="fas fa-check-double text-4xl text-gray-500 group-hover:text-accent transition-colors"></i>
+                    <h2 class="text-xl font-bold text-white group-hover:text-accent">Plagiarism Report</h2>
+                    <p class="text-xs text-gray-500">Click to verify content originality</p>
+                </a>
+            </div>
+
+            <!-- State 2: AI Details -->
+            <div id="modal-ai-details" class="hidden-content pt-4">
+                <button onclick="backToMainOptions()" class="mb-4 text-gray-400 hover:text-white flex items-center gap-2 text-sm font-medium p-2 bg-white/5 rounded"><i class="fas fa-arrow-left"></i> Back to Options</button>
+                
+                <h3 class="text-xl font-bold text-accent mb-4 border-b border-gray-700 pb-2">AI Detection Analysis</h3>
+                
+                <div id="ai-links-container" class="grid sm:grid-cols-2 gap-3 overflow-y-auto custom-scrollbar">
+                    <!-- Links injected here via JS -->
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-4 border-t border-accent/20 flex justify-between items-center">
+                <span id="report-date" class="text-gray-500 text-xs tech-font">Date: --</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 md:py-20 bg-[#121212] relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <h2 class="text-3xl md:text-5xl font-bold mb-8 text-center" data-aos="fade-down">
+                <span class="section-title">Technical Arsenal</span>
+            </h2>
+
+            <!-- Dynamic Top 10 Display (Auto Changing) -->
+            <div class="mb-12 max-w-4xl mx-auto">
+                <div class="flex justify-between items-end mb-2 border-b border-accent-30 pb-2">
+                    <h3 class="tech-font text-accent text-sm md:text-base font-bold">I'm Skills</h3>
+                    <div class="w-2 h-2 bg-accent rounded-full animate-ping"></div>
+                </div>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 md:gap-3" id="random-skill-grid">
+                    <!-- Javascript will populate this -->
+                </div>
+            </div>
+
+            <!-- Search Interface (UPDATED: Clean Search Bar Only) -->
+            <div class="bg-[#1a1a1a] p-4 md:p-6 border border-gray-700 rounded-lg shadow-2xl max-w-xl mx-auto card-3d-wrap" data-aos="fade-up">
+                <div class="card-3d">
+                    <div class="card-content-float">
+                        <div class="relative w-full">
+                            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                            <input type="text" id="skill-search" placeholder="Search Skill Database..." 
+                                   class="w-full pl-12 pr-4 py-3 retro-input rounded transition-all text-sm md:text-base font-medium">
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 justify-center min-h-[40px] max-h-[300px] overflow-y-auto custom-scrollbar" id="all-skills-container">
+                            <p class="text-gray-600 tech-font text-xs mt-4 font-medium">_TYPE TO SEARCH SKILLS...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-16 md:py-20 bg-[#0f0f0f]">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold mb-12 md:mb-16 text-center" data-aos="zoom-in">
+                <span class="section-title">Education</span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8 card-3d-wrap">
+                <!-- University -->
+                <div class="bg-[#1a1a1a] p-5 md:p-8 border-t-4 border-accent relative group card-3d rounded-lg" data-aos="fade-right">
+                    <div class="card-content-float">
+                        <div class="absolute top-4 right-4 text-3xl md:text-4xl text-accent opacity-20 group-hover:opacity-100 transition-opacity">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2">Bachelor of Commerce (B.Com)</h3>
+                        <p class="tech-font text-accent mb-4 text-sm font-bold">Info Tech | Nov 2025 - Dec 2028</p>
+                        <p class="text-gray-400 text-sm md:text-base font-medium">Dr. Jagarnath Mishra College, Muzaffarpur</p>
+                    </div>
+                </div>
+
+                <!-- 12th Class -->
+                <div class="bg-[#232323] p-5 md:p-8 border border-accent relative card-3d rounded-lg" data-aos="fade-left">
+                    <div class="card-content-float">
+                        <div class="absolute -top-3 -right-3 bg-accent text-black text-xs font-bold px-3 py-1 tech-font rounded-sm">
+                            HIGHEST GRADE
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2">Senior Secondary (XII)</h3>
+                        <p class="tech-font text-accent mb-4 text-sm font-bold">Commerce | Apr 2023 - Dec 2025</p>
+                        <p class="text-gray-300 text-base md:text-lg font-medium">Delhi Public School, International Garhan</p>
+                        
+                        <div class="mt-6 py-4 border-t border-dashed border-gray-600">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-gray-400 text-sm font-medium">Grade Achieved:</span>
+                                <span class="text-accent font-bold text-lg md:text-xl">88.89% (A2)</span>
+                            </div>
+                            <div class="w-full bg-gray-700 h-2 rounded-full overflow-hidden">
+                                <div class="bg-accent h-full w-[89%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10th Class -->
+                <div class="bg-[#1a1a1a] p-5 md:p-8 border-t-4 border-gray-600 relative opacity-80 hover:opacity-100 transition-opacity card-3d rounded-lg" data-aos="fade-up">
+                    <div class="card-content-float">
+                        <h3 class="text-lg md:text-xl font-bold text-white mb-2">Secondary (10th)</h3>
+                        <p class="tech-font text-gray-500 mb-4 text-sm font-medium">CBSE | Feb 2022 - Mar 2023</p>
+                        <p class="text-gray-400 text-sm font-medium">Delhi Public School, International Garhan</p>
+                        <p class="text-accent mt-2 font-bold">Grade: 83%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-accent-30 py-12 text-center relative z-10" id="contact">
+        <div class="max-w-4xl mx-auto px-4">
+            <!-- UPDATED: Curved Font Heading -->
+            <h2 class="text-3xl md:text-5xl font-amerika text-white mb-8 font-bold tracking-wider">CONTACT ME</h2>
+            
+            <!-- UPDATED: Social Links -->
+            <div class="flex justify-center flex-wrap gap-4 md:gap-6 mb-8">
+                <!-- Twitter -->
+                <a href="https://x.com/ImDevashish01" target="_blank" class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-accent flex items-center justify-center text-accent hover:bg-accent hover:text-black transition-all">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/imdevashishdas" target="_blank" class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-accent flex items-center justify-center text-accent hover:bg-accent hover:text-black transition-all">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/im_devadas_1" target="_blank" class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-accent flex items-center justify-center text-accent hover:bg-accent hover:text-black transition-all">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <!-- Email -->
+                <a href="mailto:imdevadaswriter@gmail.com" class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-accent flex items-center justify-center text-accent hover:bg-accent hover:text-black transition-all">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <!-- Linktree -->
+                <a href="https://linktr.ee/imdevashish" target="_blank" class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-accent flex items-center justify-center text-accent hover:bg-accent hover:text-black transition-all">
+                    <i class="fas fa-link"></i>
+                </a>
+                <!-- Muck Rack -->
+                <a href="https://muckrack.com/imdevadaswriter" target="_blank" class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-accent flex items-center justify-center text-accent hover:bg-accent hover:text-black transition-all">
+                    <i class="fas fa-newspaper"></i>
+                </a>
+            </div>
+            
+            <p class="text-gray-600 text-xs md:text-sm font-medium">
+                &copy; 2025 Devashish kumar. I'm DevaDas Writer
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // --- 1. DYNAMIC COLOR CYCLE ENGINE (30s Hold) ---
+        const accentColors = [
+            '#d4af37', // Gold
+            '#22c55e', // Green
+            '#a855f7', // Purple
+            '#f97316', // Orange
+            '#3b82f6', // Blue
+            '#E8E4C9', // Cream
+            '#ef4444'  // Red
+        ];
+        let colorIndex = 0;
+
+        function cycleAccentColor() {
+            colorIndex = (colorIndex + 1) % accentColors.length;
+            document.documentElement.style.setProperty('--accent-color', accentColors[colorIndex]);
+        }
+        
+        setInterval(cycleAccentColor, 30000);
+
+        // --- 2. Data Initialization ---
+        const allSkills = [
+            "Time Efficiency", "Fundraising", "Target Audience", "Online Research", "Lesson Planning",
+            "English Grammar", "Grammar", "Social Media Blogging", "Social Media", "Design",
+            "Social Media Marketing", "Blogger", "Customer Engagement", "Technical Writing", "Writer",
+            "Content Management Systems (CMS)", "Editing", "Digital Art", "English", "Graphic Design",
+            "Video Editing", "Keyword Research", "Research Writing", "Content Editing", "Creative Writing",
+            "Google Docs", "Invoice Processing", "Time Management", "Digital Copywriting", "Blog Creation",
+            "Editorial Standards", "Web Content Writing", "Data Cleaning", "Project Entitlements", "Technology Trends",
+            "Digital Content", "Copy Editing", "Video Generation", "Image Generation", "Digital Production",
+            "SEO Copywriting", "Content Delivery", "Hindi", "Online Platforms", "Article Writing",
+            "Technology Journalism", "Data Entry", "Blogging", "Social Media Writing", "Ghostwriting",
+            "AI Tool (Proficiency)", "Plagiarism Detection", "Research Skills", "Design Research", "Image Editing",
+            "Writing", "Transcription", "News Writing", "Article writer", "Search Engine Optimization (SEO)",
+            "Copywriting", "Scriptwriting", "Logo Design", "Content writer", "Data Analysis",
+            "English Proficiency (Spoken)", "Hindi Proficiency (Written)", "Hindi Proficiency (Spoken)", "English Proficiency (Written)", "Google Analytics",
+            "Wordpress", "Familiarity with AP Style", "Proficiency in Guidelines", "Editorial strategy and style guide (Proficiency)", "Design Maker"
+        ];
+
+        // --- ARTICLE DATA (EXACT LINKS FIXED) ---
+        const articleData = [
+            {
+                id: 1,
+                title: "Samsung Galaxy S25 & all S Series November 2025 critical fix: install now",
+                desc: "Samsung is issuing a new security update for all Galaxy phones of the S25 series in November 2025 and it is important. November 2025 update is approximately 530 MB in size. It patches 25 previously known security issues left over from the previous software version. Generally the patch seals approximately 40 attacks that attackers may have into your phone. (Mobile)",
+                date: "Nov 19, 2025",
+                image: "https://miro.medium.com/v2/resize:fit:720/format:webp/1*3VO-O2GAbxHwMpdZk4xT7Q.jpeg",
+                reports: [
+                    { name: "AIDetectorWriter", url: "https://drive.google.com/drive/folders/1_8j61mfQ630zyQ1_4caz-dZl2aJC7qUV" },
+                    { name: "Copyleaks, Originality & Seo.ai", url: "https://drive.google.com/drive/folders/1UflCbMIael19G9pMUdei78nnp6KSpkVa" },
+                    { name: "GPTinf", url: "https://drive.google.com/drive/folders/158pxVXFA032UpqAZc1MdQof_0BV9Z18r" },
+                    { name: "Grammarly", url: "https://drive.google.com/drive/folders/1QALVyVMTCzwJgUJbsaS7D5t_bG5PK4h-" },
+                    { name: "GPTZero", url: "https://app.gptzero.me/documents/687cba87-ab05-4132-9101-9988a5b432fd/share" },
+                    { name: "NoteGPT", url: "https://notegpt.io/ai-detector?share=667a2029" },
+                    { name: "Scribbr", url: "https://drive.google.com/drive/folders/1av_VCrR4-gR5fX4u5bKrXJ18AKuEKyZC" },
+                    { name: "Surferseo", url: "https://drive.google.com/drive/folders/1TmpLEc6JQMBh9uyEnUfWwmHWtNOeyf_V" },
+                    { name: "ZeroGPT", url: "https://drive.google.com/drive/folders/19R0rxAi3a-4fxnmotibnoa81PkSjbmNO" },
+                    { name: "View Article", url: "https://medium.com/@devadaswriter/samsung-galaxy-s25-all-s-series-november-2025-critical-fix-install-now-29fedcb67a2e" }
+                ],
+                plagiarism: "https://drive.google.com/drive/folders/1QTXhgl95qObIxXKtJ2Y-s5J3_ycWCUU9"
+            },
+            {
+                id: 2,
+                title: "Samsung's new TV assistant uses Multi-AI to understand context And remember conversations",
+                desc: "A real conversation can at last be seen on your TV. Samsung released its Vision AI Companion on Nov. 11, 2025, and it's turning the way we get stuff done on the screen on its head. No more shouting at a box that responds poorly. It's not just another half-baked voice thing glued on a TV. Samsung rebuilt Bixby from scratch using generative AI and then threw Microsoft Copilot and Perplexity into the mix. Result? (Artificial Intelligence)",
+                date: "Nov 12, 2025",
+                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-iJ4RE6gfhUZRWbmd9OQSrojV7T6J90I7PwCqzS2j2JSCoMT__eg53dyx4FbRG7b5cXq4cSFOp3knJ0SdHpGnLdDVYmSDNHaW1ApAIfuk_X_k_3XdyLK0HrOwyRvbO0Ed3PGhL0FwI-LFovbZyGf_dVYLPWp0O6RSydp0K1Ear20-iGyG70_r2X4teig/s1200/IMG_COM_202511120730009490.webp",
+                reports: [
+                    { name: "AIDetectorWriter", url: "https://drive.google.com/drive/folders/1XmiOPSbE2nAuBIzuMlNoJXUaxG3vh9gr" },
+                    { name: "Copyleaks, Originality & Seo.ai", url: "https://drive.google.com/drive/folders/19MtkA_BewsdTuearZtj1P6TfFuUrobu7" },
+                    { name: "GPTinf", url: "https://drive.google.com/drive/folders/16OE0QW8bfwRlLcf4OlLmNm1SXcPIkd9Y" },
+                    { name: "Grammarly", url: "https://drive.google.com/drive/folders/1lwGi1HwFDU6LFbkASqH0bG2Dg2gyiv-F" },
+                    { name: "GPTZero", url: "https://app.gptzero.me/documents/cded1998-db45-466b-950b-c596b414653e/share" },
+                    { name: "NoteGPT", url: "https://notegpt.io/ai-detector?share=35832c55" },
+                    { name: "Scribbr", url: "https://drive.google.com/drive/folders/1N2dgcxqOM22qvHVyD5zsafsorlZ0R_70" },
+                    { name: "Surferseo", url: "https://drive.google.com/drive/folders/16nvtxX7rFMjwv43u2tXbbBpuaKM9d2zF" },
+                    { name: "ZeroGPT", url: "https://drive.google.com/drive/folders/1jKWcQ9E70v2lro7m2Yq624SfJpfnPVBr" },
+                    { name: "View Article", url: "https://www.linkedin.com/pulse/samsungs-vision-ai-tv-assistant-actually-understands-you-das-otldf/" }
+                ],
+                plagiarism: "https://drive.google.com/drive/folders/10nDnn6-aCUGweRxTux9kY0lfaGvgKoMH"
+            },
+            {
+                id: 3,
+                title: "Apple Watch Series 11 vs Ultra 3 vs SE 3: Which smartwatch is right for you?",
+                desc: "Compare Apple Watch Series 11, Ultra 3, and SE 3. From $249 to $799, find which 2025 model fits your budget, lifestyle, and fitness needs. Full specs inside. (Wearables)",
+                date: "Nov 20, 2025",
+                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_e1PY09SpqU1IGL1KDezsDLVc3GF895-uZMe-_PKZxBJ5dUWA5LwbaK5WEZEK4WjsWdzwaSXxbuOoxxBw4dBs4amumwbNRlmET2KXewx1rYU2o7oOfcRZEOMRaAR2tEhBeCnpgyk8kNQY7fOwd64Wh9tuAuHiP5I1i8ORZ6ealfq4p5GbCAz7SBXrYss/s1200/IMG_COM_202511131315148760.webp",
+                reports: [
+                    { name: "AIDetectorWriter", url: "https://drive.google.com/drive/folders/18sNni7cQh3D9GDBQiAH04k-wD947_9wU" },
+                    { name: "Copyleaks, Originality & Seo.ai", url: "https://drive.google.com/drive/folders/1VGg1t5w9grRXLQtcDK6cVBsz0tHK5uNI" },
+                    { name: "GPTinf", url: "https://drive.google.com/drive/folders/1k9lhZrCVe5L3QxWvY0e6GGS4H6Ojqrtw" },
+                    { name: "Grammarly", url: "https://drive.google.com/drive/folders/1bnTR772eiID3bVEK4C9GhNb8fxBoy-gD" },
+                    { name: "GPTZero", url: "#" }, 
+                    { name: "NoteGPT", url: "https://notegpt.io/ai-detector?share=af56b77c" },
+                    { name: "Scribbr", url: "https://drive.google.com/drive/folders/1BPNm0glsZDd3Dvn7CFtjd_3kj60hkBWw" },
+                    { name: "Surferseo", url: "https://drive.google.com/drive/folders/1ScmjBOr2lb_DRbKa85KEhSPaQ_3XXpKa" },
+                    { name: "ZeroGPT", url: "https://drive.google.com/drive/folders/1vEmFTTsLlPvQgvMwA6ECtAeCdIxCLBfE" },
+                    { name: "View Article", url: "https://www.linkedin.com/pulse/apple-watch-series-11-vs-ultra-3-se-which-smartwatch-right-das-s5dff/" }
+                ],
+                plagiarism: "https://drive.google.com/drive/folders/1hWKGLj3zE-LkPg07BuDDq7x9En00LoiD"
+            },
+            {
+                id: 4,
+                title: "Google launches Private AI Compute System to challenge Apple's Privacy features",
+                desc: "Google debuts Private AI Compute for Pixel 10, matching Apple's privacy approach. The system uses TPUs and secure enclaves but needs verification. (Artificial Intelligence)",
+                date: "Nov 12, 2025",
+                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdcHxf3Eyn2u03seHAVtpBEO-0hTYyaQwtHvzIqtcNsv3l95le_FONhPc9sqrHFohml45TFoVAbdYGrnAE4ODM-aXcGfPLm58iHcD7YqUVxx9xzQ2x5RFnmYrUa8etc6G0d3TN4bmz3zTnzqWa94OrzTzU3xP3hOMqH4Q3GGJto3jdT_SgQFGye_28IGw/s1200/20251112_110454.webp",
+                reports: [
+                    { name: "AIDetectorWriter", url: "#" }, 
+                    { name: "Copyleaks, Originality & Seo.ai", url: "https://drive.google.com/drive/folders/1NLuUtJK52py9QozkkpsOzN2WmPK9GAHM" },
+                    { name: "GPTinf", url: "https://drive.google.com/drive/folders/1NaawV5wgxcSiztq2RokpZ4SA9CkhTFXl" },
+                    { name: "Grammarly", url: "https://drive.google.com/drive/folders/18jiu325nGNOA9v8L_uRfjlGZe-1duRgs" },
+                    { name: "GPTZero", url: "https://app.gptzero.me/documents/59519eb2-9c55-4033-8ea1-b10dc78bd766/share" },
+                    { name: "NoteGPT", url: "https://notegpt.io/ai-detector?share=94e69f2d" },
+                    { name: "Scribbr", url: "https://drive.google.com/drive/folders/1SLIopL_t5FkKpYw1WbKBj3cV6UAGweX-" },
+                    { name: "Surferseo", url: "https://drive.google.com/drive/folders/1ZZLUKv7mmnNStC2mjVK1Vv961nMxwJZ0" },
+                    { name: "ZeroGPT", url: "https://drive.google.com/drive/folders/1hlegp_hJZYF-aG6tDWOtQrPT6sHXdB3C" },
+                    { name: "View Article", url: "https://www.linkedin.com/pulse/google-launches-private-ai-compute-system-challenge-apples-das-xvn3f/" }
+                ],
+                plagiarism: "https://drive.google.com/drive/folders/1l19-BO4cNQtCuV0TadmtyOZGnagL2Oyo"
+            },
+            {
+                id: 5,
+                title: "Apple iOS 26.1: Everything you need to know about features, install & devices",
+                desc: "Apple iOS 26.1 is here with Liquid Glass customization, slide-to-stop alarms, and 56 security fixes. Learn what's new, how to install, and compatible devices. (Mobile)",
+                date: "Nov 11, 2025",
+                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgO34SMNUTKXKZfDXMwE7Zjp45gfcf9uy6dhU9n4PB6C1l31Mlyc92vAGqquyE7om0fMbVpw09C_4Jb9OAEXALywutZ4qJ0CP2U4DYJhdI86j9HNeTzQwmanP7oObBvRE9uB0ia5_cwTLM5JEPL2iYtPHeQJcBnp_MfF1KHU7zgEgTALBarl-j1OgsL1JE/s1200/20251111_165707.webp",
+                reports: [
+                    { name: "AIDetectorWriter", url: "https://drive.google.com/drive/folders/1arIhQlWS-bITT3vKGZj4JPWDJfSM3UAe" },
+                    { name: "Copyleaks, Originality & Seo.ai", url: "https://drive.google.com/drive/folders/1iIsxX3zPWhjRhgDhvbsxZ0emYrj7vLgZ" },
+                    { name: "GPTinf", url: "https://drive.google.com/drive/folders/1tMf-pFzYV1J4g808HoI0rh0ntv9IJ66g" },
+                    { name: "Grammarly", url: "https://drive.google.com/drive/folders/1Rbg6Xh2RMiwlzVAhYrwNv1edlFzGyymk" },
+                    { name: "GPTZero", url: "https://app.gptzero.me/documents/ea594e75-90b8-4215-812a-7f1415ab88a3/share" },
+                    { name: "NoteGPT", url: "https://notegpt.io/ai-detector?share=bd8cc77e" },
+                    { name: "Scribbr", url: "https://drive.google.com/drive/folders/1CJtunUpcPzwbnnUJE5PmU9Rn25ugNztW" },
+                    { name: "Surferseo", url: "https://drive.google.com/drive/folders/1SE_sx4fqgyBLlPPWQTdAlqhMKgCPjiD4" },
+                    { name: "ZeroGPT", url: "https://drive.google.com/drive/folders/1nQcNK8SXLrWN8H0TctNIRBCECs0ZS8Cl" },
+                    { name: "View Article", url: "https://www.linkedin.com/pulse/ios-261-update-new-features-install-guide-devices-devashish-das-1tfgf/" }
+                ],
+                plagiarism: "https://drive.google.com/drive/folders/1DF2dnUL3UnqfkFZkPwt9BUw21GqlNtcB"
+            },
+            {
+                id: 6,
+                title: "Does AMD Radeon graphics card support Nvidia G-Sync monitor? How to be fully compatible in year 2025",
+                desc: "AMD Radeon GPU with G-Sync monitor? Yes! Learn G-Sync Compatible vs Capable, FreeSync support, VRR features & best monitor choices for 2025 gaming. (Computers)",
+                date: "Nov 10, 2025",
+                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-82wviAfMlTLhl40kEMKul9JAgaNqPF8DALRqAdcNA55y-I8CMn11z5YRS1lGjMspc1_8D2wpQVo1_20v19qK-2oV0PrehLArRHuA4BdyUvcVRJsiXgH01OaIUiI0vPyeICEKsahLrbJzIpFN9AOWcnqdds10KAt-IV_TvXk_aTXC_LNZkloqoWlVR_8/s1024/1762769241866.webp",
+                reports: [
+                    { name: "AIDetectorWriter", url: "https://drive.google.com/drive/folders/1Frr6EGpqs4ddWvSElguEwP0X--P4bFro" },
+                    { name: "Copyleaks, Originality & Seo.ai", url: "https://drive.google.com/drive/folders/1-kennVBymu1wD4BuotsGAzTVEqF2s0I6" },
+                    { name: "GPTinf", url: "https://drive.google.com/drive/folders/1TQNZOaURA9mfXaOd7hwkvoyk7Lv552My" },
+                    { name: "Grammarly", url: "https://drive.google.com/drive/folders/1nRxE3mtcxIExev2O9vIW_BuWGGJR-p5j" },
+                    { name: "GPTZero", url: "https://app.gptzero.me/documents/54eeb2e6-8d5e-48a6-b07c-92d035b6c5c1/share" },
+                    { name: "NoteGPT", url: "https://notegpt.io/ai-detector?share=e2651a7d" },
+                    { name: "Scribbr", url: "https://drive.google.com/drive/folders/1LmOxsssytk54zVVG-4kUxJsxHt15t7re" },
+                    { name: "Surferseo", url: "https://drive.google.com/drive/folders/1xPAoMCaBLZLTyLP7cSKSry5opua6lBXQ" },
+                    { name: "ZeroGPT", url: "https://drive.google.com/drive/folders/1EFTfPfKYkBT47dc0yb1XBKS8Zd38fmVo" },
+                    { name: "View Article", url: "https://www.linkedin.com/pulse/amd-radeon-nvidia-g-sync-complete-compatibility-2025-devashish-das-nyllf/" }
+                ],
+                plagiarism: "https://drive.google.com/drive/folders/1xK7mtSCN3nTxNWeJ8y7T7wkvopocfqmq"
+            },
+            {
+                id: 7,
+                title: "7 best gaming laptops under $700 in 2025",
+                desc: "Top 7 gaming laptops under $700: expert reviews, specs comparison, RTX GPUs, and buyer's guide. Find the best budget gaming laptop for your needs in 2025. (Computers)",
+                date: "Nov 4, 2025",
+                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiUU_gBeUIOuEat4S1JpxIsuMN363vuFJ7WXE-xBcnq4JA-bbdH-_HhOlfMR_tvoDwlmtmVSiFkELfwt8Coy3d0B5roA3jxSL7tk4JAUVgomVVfvnbXi30BUOI2NPmauoo8YBhq-3KpV13InkyCF1uW3QOJAs-IZv8feyi2mj7Dsn-9eBmKA15v5RBqbos/s1200/IMG_COM_2025110317092465511.webp",
+                reports: [
+                    { name: "AIDetectorWriter", url: "https://drive.google.com/drive/folders/1lVMW3dqfr_bgo3Syz7bC2dEGRjD_DOcL" },
+                    { name: "Copyleaks, Originality & Seo.ai", url: "https://drive.google.com/drive/folders/1NPmtKxcF1Ik7wyqxGfBwZhZ5qleP3GAX" },
+                    { name: "GPTinf", url: "https://drive.google.com/drive/folders/1OYHP8nHQJl3tsCxIjbr0ysLjdaTBLp0F" },
+                    { name: "Grammarly", url: "https://drive.google.com/drive/folders/16F2lz9wEGZsGMdn4_ig2jrwiMEr2Kl78" },
+                    { name: "GPTZero", url: "https://app.gptzero.me/documents/097cacf8-6830-418e-8f3e-d639129d00d3/share" },
+                    { name: "NoteGPT", url: "https://notegpt.io/ai-detector?share=620917d7" },
+                    { name: "Scribbr", url: "https://drive.google.com/drive/folders/1ORR7fU704HKk7fdkD6t60lKPxCCP0Stu" },
+                    { name: "Surferseo", url: "https://drive.google.com/drive/folders/17WnTQLDq7Iqv7GmCCYb57IUOqPZX6K5F" },
+                    { name: "ZeroGPT", url: "https://drive.google.com/drive/folders/15UdsmoVCm1jXtKkDX1v6FrxVY_RRtTYz" },
+                    { name: "View Article", url: "https://www.linkedin.com/pulse/top-7-gaming-laptops-under-700-power-performance-portability-das-cxsrf/" }
+                ],
+                plagiarism: "https://drive.google.com/drive/folders/13tQJxQ1Irh986-mMDI_LEUZSPgOj3t0l"
+            },
+            {
+                id: 8,
+                title: "iPhone 17's new N1 Chip beats Android rivals in real world Wi-Fi Tests",
+                desc: "Apple’s first in-house wireless chip gives a real boost that counts. The iPhone 17 line with the new N1 chip has Wi-Fi speeds that are up to 40% faster than last year. New data from Ookla’s Speedtest Intelligence shows Apple’s custom chip beating almost every Android flagship in real world tests all over the United States. (Mobile)",
+                date: "Nov 20, 2025",
+                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5TglBzkmSMck8K40qN2lxSFkL9Mw6GgXIJkWHX9pmwDPk5BcV64ACmOx-NPLBmh8TPd_qO5-IoBS_XpBetNu_buLEzCWDaOR1GoeMxkDBlHikoSkSRmI0HneVQH1R44MuH_gFDjpqQv-GAjDZo8TusqQMI4KAYdfPggNMBz1nXguq5Ys2LAQsdopHS68/s1200/Apple%20New%20N1%20Chip%20iphone%2017%20all%20phone.jpg",
+                reports: [
+                    { name: "AIDetectorWriter", url: "https://drive.google.com/drive/folders/1tw1EF-lPB1bxKLTxOZ5L6icG6r7jvJ6q" },
+                    { name: "Copyleaks, Originality & Seo.ai", url: "https://drive.google.com/drive/folders/1a_1ePrpkTv3TFp5WB4ngDssCgkzoz88K" },
+                    { name: "GPTinf", url: "https://drive.google.com/drive/folders/15wZLrtbd6xKF3hqrv3LM3lGUs1qs4rSs" },
+                    { name: "Grammarly", url: "https://drive.google.com/drive/folders/1j4Nt8xGx6M-g_JSN66EpVHibnnF1VH0s" },
+                    { name: "GPTZero", url: "https://app.gptzero.me/documents/7078cdbf-1e55-446b-a45c-75a836d73984/share" },
+                    { name: "NoteGPT", url: "https://notegpt.io/ai-detector?share=1e8b70e5" },
+                    { name: "Scribbr", url: "https://drive.google.com/drive/folders/12TRwmoQjPH7RmW_unql92p_xXNrMTq9e" },
+                    { name: "Surferseo", url: "https://drive.google.com/drive/folders/12TRwmoQjPH7RmW_unql92p_xXNrMTq9e" },
+                    { name: "ZeroGPT", url: "https://drive.google.com/drive/folders/14iwQz5CXsPQzxY49NIEToip4f-BdI4x2" },
+                    { name: "View Article", url: "https://medium.com/@devadaswriter/iphone-17-n1-chip-beats-android-40-faster-wifi-a8b1c697a6e3" }
+                ],
+                plagiarism: "#"
+            }
+        ];
+
+        // --- 3. AOS Animations ---
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true,
+            offset: 50
+        });
+
+        // --- 4. Custom Typewriter Logic ---
+        const typeWriterEl = document.getElementById('typewriter-text');
+        const textArr = ["Devashish Kumar", "DevaDas Writer"];
+        let textIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+        let wait = 3000;
+
+        function type() {
+            const currentFullText = textArr[textIdx];
+            if (isDeleting) {
+                typeWriterEl.innerText = currentFullText.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                typeWriterEl.innerText = currentFullText.substring(0, charIdx + 1);
+                charIdx++;
+            }
+            let typeSpeed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIdx === currentFullText.length) {
+                typeSpeed = wait; 
+                isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                textIdx++;
+                if (textIdx >= textArr.length) textIdx = 0;
+                typeSpeed = 500;
+            }
+            setTimeout(type, typeSpeed);
+        }
+        document.addEventListener('DOMContentLoaded', type);
+        
+        const paraText = "Connects people with technology, literally and creatively. Breaking down the latest gadgets specs or explaining AI trends with clarity.";
+        const paraEl = document.getElementById('paragraph-writer');
+        let paraIdx = 0;
+        function typeParagraph() {
+            if (paraIdx < paraText.length) {
+                paraEl.textContent += paraText.charAt(paraIdx);
+                paraIdx++;
+                setTimeout(typeParagraph, 30);
+            }
+        }
+        setTimeout(typeParagraph, 500);
+
+        // --- 5. Highlight Animation ---
+        window.addEventListener('load', () => {
+            if(window.gsap) {
+                gsap.fromTo(".highlight-item", 
+                    { opacity: 0, x: -20 },
+                    { 
+                        opacity: 1, 
+                        x: 0, 
+                        duration: 0.8, 
+                        stagger: 0.1, 
+                        delay: 0.5, 
+                        ease: "power2.out" 
+                    }
+                );
+            }
+        });
+
+        // --- 6. PRO 3D TILT LOGIC ---
+        const cards3D = document.querySelectorAll('.card-3d');
+        
+        cards3D.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                handleTilt(card, x, y, rect.width, rect.height);
+            });
+
+            card.addEventListener('touchmove', (e) => {
+                const touch = e.touches[0];
+                const rect = card.getBoundingClientRect();
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+                handleTilt(card, x, y, rect.width, rect.height);
+            });
+
+            const resetTilt = () => {
+                card.style.transform = 'perspective(1500px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            };
+
+            card.addEventListener('mouseleave', resetTilt);
+            card.addEventListener('touchend', resetTilt);
+        });
+
+        function handleTilt(card, x, y, width, height) {
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const rotateX = (centerY - y) / 60; 
+            const rotateY = (x - centerX) / 60;
+            card.style.transform = `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.005, 1.005, 1.005)`;
+        }
+
+        // --- 7. Loading Counter Animation ---
+        const counters = document.querySelectorAll('.counter-value');
+        let hasAnimatedCounters = false;
+        
+        const animateCounters = () => {
+            if(hasAnimatedCounters) return;
+            if(!window.gsap) return;
+
+            counters.forEach(counter => {
+                counter.innerText = '0';
+                const target = +counter.getAttribute('data-target');
+                let proxy = { val: 0 };
+                gsap.to(proxy, {
+                    val: target,
+                    duration: 2.5,
+                    ease: "power2.out",
+                    onUpdate: function() { counter.innerText = Math.ceil(proxy.val); }
+                });
+            });
+            hasAnimatedCounters = true;
+        }
+        
+        const observer = new IntersectionObserver((entries) => {
+            if(entries[0].isIntersecting) {
+                animateCounters();
+                observer.disconnect();
+            }
+        }, { threshold: 0.5 });
+        const highlightsSection = document.getElementById('highlights');
+        if(highlightsSection) observer.observe(highlightsSection);
+
+        // --- 8. FIXED Skill Search Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const skillsContainer = document.getElementById('all-skills-container');
+            const searchInput = document.getElementById('skill-search');
+            
+            // Expose renderSkills to window so the button can call it
+            window.renderSkills = function(filter = "") {
+                if(!skillsContainer) return;
+
+                skillsContainer.innerHTML = "";
+                
+                // Show default message if empty input (unless forced "ALL")
+                if(filter === "" || (typeof filter === 'string' && filter.trim() === "")) {
+                    skillsContainer.innerHTML = `<p class="text-gray-600 tech-font text-xs font-medium">_TYPE TO SEARCH SKILLS...</p>`;
+                    return;
+                }
+
+                let filtered = [];
+                if(filter === "ALL") {
+                    filtered = allSkills;
+                    // Clear input if showing all
+                    if(searchInput) searchInput.value = "";
+                } else {
+                    filtered = allSkills.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
+                }
+
+                if(filtered.length === 0) {
+                    skillsContainer.innerHTML = `<p class="text-red-400 tech-font w-full text-center font-medium">No skills found matching "${filter}"</p>`;
+                    return;
+                }
+
+                filtered.forEach((skill, index) => {
+                    const tag = document.createElement('span');
+                    tag.className = "px-3 py-1 border border-gray-700 bg-[#121212] text-gray-300 text-xs md:text-sm hover:border-accent hover:text-accent transition-all cursor-default tech-font font-medium inline-block mb-1";
+                    tag.innerText = skill;
+                    skillsContainer.appendChild(tag);
+                    
+                    // Simple fade in
+                    if(window.gsap) {
+                        gsap.fromTo(tag, {opacity: 0, y: 10}, { opacity: 1, y: 0, duration: 0.2, delay: index * 0.01 });
+                    }
+                });
+            }
+
+            if(searchInput) {
+                searchInput.addEventListener('input', (e) => window.renderSkills(e.target.value));
+            }
+        });
+
+        // --- 9. Random Skill Grid ---
+        const randomGrid = document.getElementById('random-skill-grid');
+        const subtitleEl = document.getElementById('hero-subtitle');
+
+        function getRandomSkills(count) {
+            const shuffled = [...allSkills].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        function createSkillCard(skillName) {
+            return `
+                <div class="skill-flipper h-12 md:h-14 cursor-pointer">
+                    <div class="skill-card-inner w-full h-full bg-[#232323] border border-accent-30 flex items-center justify-center p-1 text-center shadow-lg">
+                        <span class="text-accent font-bold font-serif text-[9px] md:text-[10px] leading-tight break-words">${skillName}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateRandomSkills() {
+            if(!window.gsap) return;
+            gsap.to(".skill-card-inner", {
+                rotationX: 90,
+                opacity: 0,
+                duration: 0.5,
+                stagger: 0.02, 
+                onComplete: () => {
+                    const newSkills = getRandomSkills(10);
+                    randomGrid.innerHTML = newSkills.map(s => createSkillCard(s)).join('');
+                    gsap.fromTo(".skill-card-inner", 
+                        { rotationX: -90, opacity: 0 },
+                        { rotationX: 0, opacity: 1, duration: 0.8, ease: "back.out(1.7)", stagger: 0.02 }
+                    );
+                }
+            });
+        }
+        
+        function updateSubtitleSkills() {
+            subtitleEl.style.opacity = '0';
+            setTimeout(() => {
+                const threeSkills = getRandomSkills(3);
+                subtitleEl.innerText = threeSkills.join(' | ');
+                subtitleEl.style.opacity = '1';
+            }, 500);
+        }
+
+        randomGrid.innerHTML = getRandomSkills(10).map(s => createSkillCard(s)).join('');
+        setInterval(updateRandomSkills, 4500);
+        setInterval(updateSubtitleSkills, 4500);
+
+        // --- 10. ARTICLE CAROUSEL & ARCHIVE LOGIC ---
+        const articleTrack = document.getElementById('article-track');
+        const modal = document.getElementById('report-modal');
+        const archiveModal = document.getElementById('archive-modal');
+        const archiveGrid = document.getElementById('archive-grid');
+        
+        const aiLinksContainer = document.getElementById('ai-links-container');
+        const plagiarismBtnLink = document.getElementById('plagiarism-btn-link');
+        const reportDate = document.getElementById('report-date');
+        const modalMainOptions = document.getElementById('modal-main-options');
+        const modalAiDetails = document.getElementById('modal-ai-details');
+
+        // Render Articles
+        function renderArticles() {
+            // Duplicate content multiple times for seamless illusion
+            const displayData = [...articleData, ...articleData, ...articleData, ...articleData];
+            
+            articleTrack.innerHTML = displayData.map((article, index) => `
+                <div class="article-card-outline group cursor-pointer relative" onclick="openReport(${index % articleData.length})">
+                    <!-- Image Area -->
+                    <img src="${article.image}" alt="${article.title}" class="w-full h-full object-cover aspect-16-9-strict transition-transform duration-700 group-hover:scale-105">
+                    
+                    <!-- Gradient Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                    
+                    <!-- Content -->
+                    <div class="absolute bottom-0 left-0 w-full p-4 md:p-6 text-left">
+                        <h3 class="text-white font-bold text-lg md:text-2xl font-caviar leading-tight mb-2 drop-shadow-lg">${article.title}</h3>
+                        
+                        <!-- Description & Button -->
+                        <div class="max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-[200px] group-hover:opacity-100 hidden md:block">
+                            <p class="text-gray-300 text-xs md:text-sm mb-4 line-clamp-3">${article.desc}</p>
+                            <button class="bg-accent text-black font-bold px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-xs tech-font rounded hover:bg-white transition-colors">
+                                VIEW REPORT
+                            </button>
+                        </div>
+                         <!-- Mobile Indicator -->
+                        <div class="md:hidden text-accent text-xs font-bold tech-font mt-1">
+                            TAP TO VIEW REPORT
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        renderArticles();
+
+        // ** HYBRID SCROLL ENGINE **
+        let scrollSpeed = 0.8; // Speed of auto scroll
+        let autoScrollActive = true;
+        let animationFrameId;
+        
+        function smoothAutoScroll() {
+            if (autoScrollActive) {
+                articleTrack.scrollLeft += scrollSpeed;
+                // Infinite Loop Illusion Logic
+                if (articleTrack.scrollLeft >= (articleTrack.scrollWidth / 2)) {
+                    articleTrack.scrollLeft = 0;
+                }
+            }
+            animationFrameId = requestAnimationFrame(smoothAutoScroll);
+        }
+
+        // Start Auto Scroll
+        smoothAutoScroll();
+
+        // Pause on Interaction (Hover / Touch)
+        const stopScroll = () => { autoScrollActive = false; };
+        const resumeScroll = () => { setTimeout(() => { autoScrollActive = true; }, 2000); }; // Resume after 2s
+
+        articleTrack.addEventListener('mouseenter', stopScroll);
+        articleTrack.addEventListener('touchstart', stopScroll, { passive: true });
+        articleTrack.addEventListener('mousedown', stopScroll);
+
+        articleTrack.addEventListener('mouseleave', resumeScroll);
+        articleTrack.addEventListener('touchend', resumeScroll);
+        articleTrack.addEventListener('mouseup', resumeScroll);
+
+
+        // --- HERO IMAGE SLIDESHOW ENGINE (11s) ---
+        const profileImages = [
+            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNPV__yhQOBBzX9G8Or0w_cK2SIpyQwA2GHLXpbi7jD7wt-tUY-ebRStp-fURMI3vQ5qXuxCjceilS3LW-Vq78_Ah9nvYhjdbls4X8xUwLo6Ubb-XfCQN3pD6ia4w8ZhXTzj9ih0dxriliFABjlZKrwFUMBgySD7tHyzhT6TTsNsnBBXkky6zQD2Yfmss/s3456/IMG_COM_202512060433422980.webp",
+            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWujOT93PYfqpjJ2Na2vD1FF8P5iTh41KeeitVyUi8z7Yi5dY6v80-0RrxZoCJFEl22NIzmMyXmN1VXLjDM-TX082YDMrQ_wBQ4Otfr6mp9kE6ZVKk1-P6lXeuB937Ysxq8C77ON9yWDnYYN4zqPCL16r8rSl4MVD-V_JNhpWWllLdCPpGxv005e4YuYw/s2048/IMG_COM_202512060433434501.webp",
+            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6PFF79aOxrrPR6IClLe2TxceH2YHEQl1NMfbsp4IiD27clq5JcHnVm0HchZ3GPRyrUkd62IxwXz9hmLXWx18NBhyAxxtR7FfVcxNTiY-yk6pGkUyPQCIz4XEdppHg3JwQ-sQKHz7fUq9hgaBFChuvEtH7RT6wExvEYbG2sOa9LZUWyYkXAjC4ezgeMfQ/s3264/IMG_COM_202512060433444434.webp",
+            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjJxGeBJrZv_J4XrqxnRGn97MLssGS-Gp9Gnp8g14WfDvCbMAxA0fpMCXYcqSjqNsJlDZX0Hv7VffJNPk0jOeenTE0GxeJFmMyRqDZOlIwmlep6XFlKBOVk2Y9TEmkjVHOpjNep2NQpTfGOCvY-n76gZlWbL_yOtYAV9k2buVjL7K2zS2lXCF36-6-MfVY/s1024/IMG_COM_202512060433442833.webp",
+            "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFLNgyltdfluKNU0HR-hd2vJSK9O96A0CBn5-xdOnN8YNROFaAfEgR4ffuV6Tu5Nzz4VuKIjKgVciuw4u3j1ZaxGZQ_htlHbdUhrLoZ8zAMD9w3ELVG9AV1FRDEf71BMhBX_QxnH8097oUmiS4kQ5YC4Ek9AxnA_7Q743e4fq3_r90KomW7Ka_uCSZqKU/s2048/IMG_COM_202512060433439292.webp"
+        ];
+        
+        let currentImgIndex = 0;
+        const profileImgEl = document.getElementById('profile-slideshow');
+        
+        function rotateProfileImage() {
+            // Fade out
+            profileImgEl.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Change Src
+                currentImgIndex = (currentImgIndex + 1) % profileImages.length;
+                profileImgEl.src = profileImages[currentImgIndex];
+                
+                // Fade In
+                setTimeout(() => {
+                    profileImgEl.style.opacity = '1';
+                }, 100);
+            }, 1000); // 1s transition
+        }
+        
+        // Start Interval: 11000ms = 11 seconds
+        setInterval(rotateProfileImage, 11000);
+
+
+        // --- MODAL LOGIC (FIXED) ---
+        let currentArticleData = null;
+
+        window.openReport = (index) => {
+            currentArticleData = articleData[index];
+            
+            // Set Date
+            reportDate.innerText = `Date: ${currentArticleData.date}`;
+            
+            // Link Plagiarism Button
+            plagiarismBtnLink.href = currentArticleData.plagiarism;
+
+            // Reset Modal View to Main Options
+            modalMainOptions.classList.remove('hidden-content');
+            modalMainOptions.classList.add('visible-grid'); // Use specific class for grid
+            modalAiDetails.classList.add('hidden-content');
+            modalAiDetails.classList.remove('visible-content');
+
+            // Show Modal
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            if(window.gsap) {
+                gsap.fromTo("#report-modal > div", 
+                    { scale: 0.9, opacity: 0 },
+                    { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out" }
+                );
+            }
+        };
+
+        window.showAiDetails = () => {
+            // Populate AI Links Dynamically - NO ANIMATION, NO OPACITY 0
+            aiLinksContainer.innerHTML = currentArticleData.reports.map((link) => `
+                <a href="${link.url}" target="_blank" class="block w-full text-left p-3 bg-white/5 border border-gray-700 rounded hover:border-accent hover:bg-white/10 transition-all text-sm font-medium text-gray-300 report-link group relative z-50">
+                    <span class="flex justify-between items-center">
+                        ${link.name}
+                        <i class="fas fa-external-link-alt opacity-50 group-hover:opacity-100 text-xs"></i>
+                    </span>
+                </a>
+            `).join('');
+
+            // Transition Views
+            modalMainOptions.classList.add('hidden-content');
+            modalMainOptions.classList.remove('visible-grid');
+            
+            modalAiDetails.classList.remove('hidden-content');
+            modalAiDetails.classList.add('visible-content');
+        };
+
+        window.backToMainOptions = () => {
+            modalAiDetails.classList.add('hidden-content');
+            modalAiDetails.classList.remove('visible-content');
+            
+            modalMainOptions.classList.remove('hidden-content');
+            modalMainOptions.classList.add('visible-grid');
+        };
+
+        window.closeReport = () => {
+            if(window.gsap) {
+                gsap.to("#report-modal > div", {
+                    scale: 0.9,
+                    opacity: 0,
+                    duration: 0.2,
+                    onComplete: () => {
+                        modal.classList.add('hidden');
+                        modal.classList.remove('flex');
+                    }
+                });
+            } else {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        };
+
+        // --- NEW ARCHIVE MODAL LOGIC ---
+        window.openArchiveModal = () => {
+            // Populate grid
+            archiveGrid.innerHTML = articleData.map((article, index) => `
+                <div class="archive-grid-item bg-[#1a1a1a] rounded-xl overflow-hidden group" onclick="closeArchiveModal(); openReport(${index});">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="${article.image}" alt="${article.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                         <div class="absolute top-2 right-2 bg-black/70 text-accent text-[10px] font-bold px-2 py-1 rounded backdrop-blur-sm tech-font">
+                            ${article.date}
+                        </div>
+                    </div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-white font-bold text-lg mb-2 leading-tight group-hover:text-accent transition-colors font-caviar">${article.title}</h3>
+                        <p class="text-gray-400 text-xs md:text-sm line-clamp-3 mb-4">${article.desc}</p>
+                        <div class="text-accent text-xs font-bold tech-font flex items-center gap-2">
+                            READ REPORT <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            archiveModal.classList.remove('hidden');
+            archiveModal.classList.add('flex');
+            
+            if(window.gsap) {
+                gsap.fromTo("#archive-grid > div", 
+                    { opacity: 0, y: 30 },
+                    { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, ease: "power2.out" }
+                );
+            }
+        };
+
+        window.closeArchiveModal = () => {
+            archiveModal.classList.add('hidden');
+            archiveModal.classList.remove('flex');
+        };
+        
+        // Close on clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeReport();
+        });
+
+        // Navbar Scroll & Mobile Menu (Fixed)
+        const nav = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('h-16');
+                nav.classList.remove('h-20');
+            } else {
+                nav.classList.add('h-20');
+                nav.classList.remove('h-16');
+            }
+        });
+
+        mobileMenuBtn.addEventListener('click', (e) => { 
+            e.stopPropagation(); // Prevent closing immediately
+            mobileMenu.classList.toggle('open'); 
+        });
+        
+        // Close menu when clicking links
+        mobileLinks.forEach(link => { 
+            link.addEventListener('click', () => { 
+                mobileMenu.classList.remove('open'); 
+            }); 
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('open');
+            }
+        });
+
+    </script>
+</body>
+</html>
